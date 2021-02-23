@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+
+
+	<center inputmode="text">wellcoem to the test işlemleri</center>
+	<center>
+
+		<form th:action="@{/newtest/{id}(id=0)}">
+
+
+			<button type="submit">add new test</button>
+
+
+		</form>
+
+	</center>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<div class="container">
+
+
+
+		<table class="table table-hover">
+			<caption>List of tests</caption>
+			<thead>
+				<tr>
+
+					<th scope="col">#</th>
+					<th scope="col">test title</th>
+					<th scope="col">actions</th>
+
+
+
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="test : ${tests}">
+
+					<td th:text="${test.tId}"></td>
+					<td th:text="${test.testTitleText}"></td>
+					<th><a th:href="@{/newtest/{id}(id=${test.tId})}">Edit</a> <a
+						th:href="@{/deletetest/{id}(id=${test.tId})}">Delete</a>
+
+					</th>
+
+				</tr>
+
+			</tbody>
+		</table>
+
+
+
+
+
+
+
+
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+
+
+
+	<div th:if="${message != null}">
+
+		<div class="alert alert-primary"  role="alert"> 
+		
+		<p  th:text="${message}"  >  </p>
+		
+		<p th:if="${#fields.hasErrors(')"  >
+
+		</div>
+
+
+
+	</div>
+
+
+	<div class="container">
+
+
+
+
+		welcomme to cotegory page
+
+		<form th:action="@{/newcategory/{id}(id=0)}" method="post">
+
+
+
+			<button class="btn btn-primary" type="submit">category add</button>
+
+		</form>
+
+
+		<table class="table table-hover">
+
+			<thead>
+
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">categroy text</th>
+					<th scope="col">actions</th>
+
+				</tr>
+
+
+			</thead>
+
+
+			<tbody>
+				<tr th:each="category : ${categories}">
+					<td th:text="${category.cId}"></td>
+					<td th:text="${category.cText}"></td>
+					<td><a th:href="@{/newcategory/{id}(id=${category.cId})}">Edit</a>
+						<a th:href="@{/deletecategory/{id}(id=${category.cId})}">
+							delete</a></td>
+				</tr>
+
+
+
+
+			</tbody>
+
+		</table>
+
+
+	</div>
+	<script>
+		window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function() {
+				$(this).remove();
+			});
+		}, 2000);
+	</script>
+</body>
+</html>
