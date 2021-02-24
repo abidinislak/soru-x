@@ -25,7 +25,7 @@ public class JqueryController {
 
 		ModelAndView mav = new ModelAndView("jquery/jqueryhome");
 
-		Test dGec = tService.findById(180);
+		Test dGec = tService.findById(213);
 
 		Test_Dto dGecTestDto = MapperTest.INSTANCE.testToTest_Dto(dGec);
 

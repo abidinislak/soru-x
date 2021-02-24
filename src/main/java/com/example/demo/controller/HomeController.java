@@ -47,7 +47,7 @@ public class HomeController {
 
 		Question question = new Question();
 
-//		mav.addObject("categories", cServices.findAll());
+		mav.addObject("categories", cService.findAll());
 
 		if (qtext.isEmpty() || qtext.isBlank() || qtext == null) {
 
@@ -85,6 +85,17 @@ public class HomeController {
 	public ModelAndView testHome() {
 
 		ModelAndView mav = new ModelAndView("thome");
+
+		mav.addObject("tests", tService.findAll());
+
+		return mav;
+	}
+
+	@RequestMapping("/denemehome")
+
+	public ModelAndView denemehome() {
+
+		ModelAndView mav = new ModelAndView("denemehome");
 
 		mav.addObject("tests", tService.findAll());
 

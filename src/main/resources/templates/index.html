@@ -9,6 +9,9 @@
 
 
 <div class="container" >
+<center>
+
+
 
 
 welcome to sorular x page
@@ -27,6 +30,7 @@ welcome to sorular x page
 					<th scope="col">#</th>
 					<th scope="col">question text</th>
 					<th scope="col">question category</th>
+					<th scope="col">question category</th>
 					<th scope="col">Actions</th>
 
 				</tr>
@@ -36,17 +40,6 @@ welcome to sorular x page
 					<td th:text="${question.qId}"></td>
 					<td th:text="${question.qtext}"></td>
 					<td th:text="${question.category}"></td>
-
-
-
-<!-- 					<td th:each="category : ${categories}" -->
-<!-- 						th:if="(${category.categoryid} == *{category.cId})" -->
-<!-- 						th:text="${category.cText}"></td> -->
-
-
-
-
-
 					<td><a th:href="@{/new/{id}(id=${question.qId})}">Edit</a> <a
 						th:href="@{/delete/{id}(id=${question.qId})}">Delete</a></td>
 				</tr>
@@ -59,7 +52,7 @@ welcome to sorular x page
 
 
 
-
+</center>
 
 </div>
 

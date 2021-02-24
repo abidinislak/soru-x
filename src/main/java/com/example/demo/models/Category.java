@@ -38,14 +38,9 @@ public class Category {
 		this.cText = cText;
 	}
 
-	public Category() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
-		return getcText();
+		return cText;
 	}
 
 }
