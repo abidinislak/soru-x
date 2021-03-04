@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Test {
@@ -25,7 +25,17 @@ public class Test {
 
 	private String testTitleText;
 
-	@OneToMany
+	private String testAck;
+
+	public String getTestAck() {
+		return testAck;
+	}
+
+	public void setTestAck(String testAck) {
+		this.testAck = testAck;
+	}
+
+	@ManyToMany
 	private List<Question> questions = new ArrayList<>();
 
 	public String getTestTitleText() {

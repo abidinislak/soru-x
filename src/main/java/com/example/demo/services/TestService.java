@@ -11,6 +11,7 @@ import com.example.demo.models.Test;
 
 @Service
 public class TestService {
+
 	@Autowired
 	private TestRepo testRepo;
 

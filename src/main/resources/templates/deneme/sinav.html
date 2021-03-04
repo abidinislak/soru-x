@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+	<div class="container">
+		<center>
+
+			<form th:action="@{/addtest}" method="post">
+
+				<div th:object="${deneme}">
+
+
+					<div class="row">
+
+
+
+						<p class="card-text" th:text="${deneme.sorular[1].soru.qtext}"></p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+						<p>sdvsdf</p>
+					
+						<div id="portfoliolist">
+							<div class="portfolio usado escambolivre"
+								data-cat="usado escambolivre" th:each="cvp : ${deneme.sorular[1].cevaplar}">
+								<div class="portfolio-wrapper">
+									
+										<div class="label-text">
+											<span class="text-category" th:text="${cvp.atext}"></span>
+										</div>
+										<div class="label-bg"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+	</div>
+
+
+	</form>
+
+
+
+	</center>
+
+	</div>
+
+
+</body>
+</html>

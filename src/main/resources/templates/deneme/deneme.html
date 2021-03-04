@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head  th:replace="fragments/head :: head"  >
+  
+</head    >
+<body>
+<nav  th:replace="fragments/navbar :: navbar" ></nav>
+
+<div  class="container"  > 
+<center>
+<form th:action="@{/deneme/sinav}" method="post">
+<div th:object="${test}">
+				<div class="form-group">
+					<input type="hidden" class="form-control" id="qtext"
+						th:field="*{tId}" />
+				</div>
+			</div>
+
+<p class="card-text" th:text="${test.testTitleText}"  ></p>
+<p  class="card-text" th:text="${message}"     >
+<!-- th:href="@{/new/{id}(id=${question.qId})}"  -->
+
+
+
+<div class="row justify-content-md-center">
+
+    <div class="col-md-auto">
+<a class="nav-link" href="/denemehome">DENEME SINAVları sayfasına geri dön</a>
+    </div>
+    
+    <div class="col-md-auto">
+<a  class="btn btn-secondary"  th:href="@{/deneme/sinav(Id=${test.tId})}"   >sınavı başlat</a> 
+    </div>
+    
+  </div>
+</form>
+</center>
+
+</div>
+
+
+</body>
+</html>
