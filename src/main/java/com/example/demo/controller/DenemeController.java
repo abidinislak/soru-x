@@ -45,7 +45,7 @@ public class DenemeController {
 	}
 
 	@RequestMapping("/sinav")
-	public ModelAndView sınava(int Id, @ModelAttribute("test") Test test) {
+	public ModelAndView sınav(int Id, @ModelAttribute("test") Test test) {
 
 		System.err.println(test.getTestAck());
 
@@ -84,6 +84,15 @@ public class DenemeController {
 		mav.addObject("deneme", deneme);
 
 		return mav;
+	}
+
+	@RequestMapping("/sinava")
+	public ModelAndView sinava(@ModelAttribute("deneme") Deneme sinava) {
+
+		System.err.println("///***");
+
+		return new ModelAndView();
+
 	}
 
 }

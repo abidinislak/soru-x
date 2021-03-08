@@ -10,63 +10,43 @@
 	<div class="container">
 		<center>
 
-			<form th:action="@{/addtest}" method="post">
+			<form th:action="@{/deneme/sinava}"    th:object="${deneme}"method="post">
 
 				<div th:object="${deneme}">
 
-
 					<div class="row">
 
-
-
 						<p class="card-text" th:text="${deneme.sorular[1].soru.qtext}"></p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-						<p>sdvsdf</p>
-					
-						<div id="portfoliolist">
-							<div class="portfolio usado escambolivre"
-								data-cat="usado escambolivre" th:each="cvp : ${deneme.sorular[1].cevaplar}">
-								<div class="portfolio-wrapper">
-									
-										<div class="label-text">
-											<span class="text-category" th:text="${cvp.atext}"></span>
-										</div>
-										<div class="label-bg"></div>
-									</div>
-								</div>
-							</div>
-						</div>
 
+						<ul>
+							<li th:each="cevaplar: ${deneme.sorular[1].cevaplar}"><input
+								type="checkbox" th:field="${deneme.sorular[1].kullanıcıcevabıo}"
+								th:value="${cevaplar.id}" /> <label
+								th:text="${cevaplar.atext}"></label></li>
+						</ul><button class="btn btn-primary" type="submit">next</button>
+						<!-- 						<div id="portfoliolist"> -->
+						<!-- 							<div class="portfolio usado escambolivre" -->
+						<!-- 								data-cat="usado escambolivre" -->
+						<!-- 								th:each="cvp : ${deneme.sorular[1].cevaplar}"> -->
+						<!-- 								<div class="portfolio-wrapper"> -->
+
+						<!-- 									<div class="label-text"> -->
+						<!-- 										<span class="text-category" th:text="${cvp.atext}"></span> -->
+						<!-- 									</div> -->
+						<!-- 									<div class="label-bg"></div> -->
+						<!-- 								</div> -->
+						<!-- 							</div> -->
+						<!-- 						</div> -->
 					</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 				</div>
-	</div>
 
 
-	</form>
+			</form>
 
 
 
-	</center>
+		</center>
 
 	</div>
 
