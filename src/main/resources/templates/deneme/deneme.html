@@ -9,12 +9,29 @@
 
 <div  class="container"  > 
 <center>
-<form th:action="@{/deneme/sinav}" method="post">
+//<form th:action="@{/deneme/sinav}" method="get">
+<form th:action="@{/sinav}" method="post">
 <div th:object="${test}">
-				<div class="form-group">
+				
 					<input type="hidden" class="form-control" id="qtext"
 						th:field="*{tId}" />
-				</div>
+						<input type="hidden" class="form-control" id="qtext1"
+						th:field="*{testTitleText}" />
+						<input type="hidden" class="form-control" id="qtext11"
+						th:field="*{testAck}" />
+				
+			</div>
+			
+			
+			
+			<div th:object="${deneme}">
+			
+			<input type="hidden" class="form-control" id="qtext"
+						th:field="*{test}" />
+			
+			
+			
+			
 			</div>
 
 <p class="card-text" th:text="${test.testTitleText}"  ></p>

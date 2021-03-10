@@ -41,6 +41,38 @@ public class DenemeController {
 				"deneme sınavına gireceksiniz. sınavı bitir tuşuna basmadığınız veya son soturyu katydetm ediğiniz sürece sıvauını tammalanmış olmayabcaktır "
 						+ tService.findById(Id).getTestAck());
 
+		Deneme deneme = new Deneme();
+
+		deneme.setTest(tService.findById(Id));
+
+		List<sorular> sorular = new ArrayList<sorular>();
+		int sirano = 0;
+		for (Question sorular2 : qService.getByTest(Id)) {
+
+			sorular soru = new sorular();
+
+			soru.setSorusirano(sirano);
+			soru.setSoru(sorular2);
+
+			List<Answer> cevaplar = new ArrayList<Answer>();
+
+			for (Answer sorular3 : aService.findbyQuestion(sorular2)) {
+
+				cevaplar.add(sorular3);
+
+			}
+			soru.setCevaplar(cevaplar);
+
+			sorular.add(soru);
+
+			deneme.setSorular(sorular);
+			sirano++;
+		}
+
+		// mav.addObject("sorusira", 0);
+
+		mav.addObject("deneme", deneme);
+
 		return mav;
 	}
 
@@ -82,6 +114,47 @@ public class DenemeController {
 		mav.addObject("sorusira", 0);
 
 		mav.addObject("deneme", deneme);
+
+		return mav;
+
+	}
+
+	@RequestMapping("/sinavx")
+	public ModelAndView sınavx(@ModelAttribute("deneme") Deneme deneme) {
+
+		ModelAndView mav = new ModelAndView("deneme/sinav");
+
+//		 Deneme deneme = new Deneme();
+//
+//		 deneme.setTest(tService.findById(Id));
+//
+//		List<sorular> sorular = new ArrayList<sorular>();
+//		int sirano = 0;
+//		for (Question sorular2 : qService.getByTest(Id)) {
+//
+//			sorular soru = new sorular();
+//
+//			soru.setSorusirano(sirano);
+//			soru.setSoru(sorular2);
+//
+//			List<Answer> cevaplar = new ArrayList<Answer>();
+//
+//			for (Answer sorular3 : aService.findbyQuestion(sorular2)) {
+//
+//				cevaplar.add(sorular3);
+//
+//			}
+//			soru.setCevaplar(cevaplar);
+//
+//			sorular.add(soru);
+//
+//			deneme.setSorular(sorular);
+//			sirano++;
+//		}
+//
+//		mav.addObject("sorusira", 0);
+//
+//		mav.addObject("deneme", deneme);
 
 		return mav;
 	}

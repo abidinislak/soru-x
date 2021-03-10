@@ -10,7 +10,8 @@
 	<div class="container">
 		<center>
 
-			<form th:action="@{/deneme/sinava}"    th:object="${deneme}"method="post">
+			<form th:action="@{/deneme/sinava}" th:object="${deneme}"
+				method="post">
 
 				<div th:object="${deneme}">
 
@@ -21,24 +22,30 @@
 						<ul>
 							<li th:each="cevaplar: ${deneme.sorular[1].cevaplar}"><input
 								type="checkbox" th:field="${deneme.sorular[1].kullanıcıcevabıo}"
-								th:value="${cevaplar.id}" /> <label
-								th:text="${cevaplar.atext}"></label></li>
-						</ul><button class="btn btn-primary" type="submit">next</button>
-						<!-- 						<div id="portfoliolist"> -->
-						<!-- 							<div class="portfolio usado escambolivre" -->
-						<!-- 								data-cat="usado escambolivre" -->
-						<!-- 								th:each="cvp : ${deneme.sorular[1].cevaplar}"> -->
-						<!-- 								<div class="portfolio-wrapper"> -->
+								th:value="${cevaplar.id}" /> <label th:text="${cevaplar.atext}"></label></li>
+						</ul>
+						<button class="btn btn-primary" type="submit">next</button>
 
-						<!-- 									<div class="label-text"> -->
-						<!-- 										<span class="text-category" th:text="${cvp.atext}"></span> -->
-						<!-- 									</div> -->
-						<!-- 									<div class="label-bg"></div> -->
-						<!-- 								</div> -->
-						<!-- 							</div> -->
-						<!-- 						</div> -->
 					</div>
 
+
+
+
+				</div>
+
+				<div th:object="${deneme}">
+					<div th:each="sorular: ${deneme.sorular}">
+
+						<p th:text="${sorular.soru.qtext}"></p>
+
+						<ul>
+							<li th:each="cevaplar: ${sorular.cevaplar}"><label
+								th:text="${cevaplar.atext}"></label></li>
+						</ul>
+
+
+
+					</div>
 				</div>
 
 
