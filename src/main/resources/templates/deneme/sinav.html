@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+	<div class="container">
+		<center>
+
+			<form th:action="@{/deneme/sinava}" th:object="${deneme}" method="post">
+
+				<div th:object="${deneme}">
+
+					<div class="row">
+
+						<p class="card-text" th:text="${deneme.sorular[0].soru.qtext}">
+
+							<input type="hidden" th:value="${deneme.sorular[0].soru.qId}" th:attr="name='qId'" />
+
+
+						<ul>
+							<li th:each="cevaplar: ${deneme.sorular[0].cevaplar}"><input type="checkbox"
+									th:field="${deneme.sorular[0].kullanıcıcevabıo}" th:value="${cevaplar.id}" /> <label
+									th:text="${cevaplar.atext}"></label></li>
+						</ul>
+
+
+					</div>
+
+
+
+					<div class="row">
+
+						<p class="card-text" th:text="${deneme.sorular[1].soru.qtext}"></p>
+						<input type="hidden" th:value="${deneme.sorular[1].soru.qId}" th:attr="name='qId'" />
+
+
+						<ul>
+							<li th:each="cevaplar: ${deneme.sorular[1].cevaplar}"><input type="checkbox"
+									th:field="${deneme.sorular[1].kullanıcıcevabıo}" th:value="${cevaplar.id}" /> <label
+									th:text="${cevaplar.atext}"></label></li>
+						</ul>
+
+
+					</div>
+					<div class="row">
+
+						<p class="card-text" th:text="${deneme.sorular[2].soru.qtext}"></p>
+						<input type="hidden" th:value="${deneme.sorular[2].soru.qId}" th:attr="name='qId'" />
+
+
+						<ul>
+							<li th:each="cevaplar: ${deneme.sorular[2].cevaplar}"><input type="checkbox"
+									th:field="${deneme.sorular[2].kullanıcıcevabıo}" th:value="${cevaplar.id}" /> <label
+									th:text="${cevaplar.atext}"></label></li>
+						</ul>
+
+					</div>
+
+
+					<button class="btn btn-primary" type="submit">next</button>
+
+
+
+				</div>
+
+
+
+			</form>
+
+
+
+		</center>
+
+	</div>
+
+
+</body>
+
+</html>

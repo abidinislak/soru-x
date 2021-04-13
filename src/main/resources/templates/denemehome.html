@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+
+	<div class="container">
+		<center inputmode="text">
+			DENEME SINAVI İŞLEMLERİ MODÜLÜNME HOŞ GELDİNİZ
+
+
+			<table class="table table-hover">
+
+				<thead>
+
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">denme adı</th>
+						<th scope="col">deneme kategorilker</th>
+						<th scope="col">denem açıklama</th>
+						<th scope="col">actions</th> <
+					</tr>
+				</thead>
+				<tbody>
+				
+					<tr th:each="test : ${tests}">
+						<td th:text="${test.tId}"></td>
+						<td th:text="${test.testTitleText}"></td>
+						<td scope="col">java, oca , certifications </td>
+						<td scope="col">bu deneme çok zor</td>
+						<td>
+							<a th:href="@{/deneme/deneme(Id=${test.tId})}">denme sınavına git </a>
+						</td>
+					</tr>
+					</tr>
+				</tbody>
+
+			</table>
+
+
+
+
+		</center>
+
+
+	</div>
+
+
+</body>
+</html>
