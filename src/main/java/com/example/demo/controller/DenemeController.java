@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.models.Answer;
@@ -111,8 +113,13 @@ public class DenemeController {
 			deneme.setSorular(sorular);
 			sirano++;
 		}
-
+		int [] asd= {0,1,2};
+		
+deneme.setSayi(asd);
 		mav.addObject("sorusira", 0);
+		
+		Integer [] cern= {};
+		mav.addObject("cern",cern);
 
 		mav.addObject("deneme", deneme);
 
@@ -161,7 +168,8 @@ public class DenemeController {
 	}
 
 	@RequestMapping("/sinava")
-	public ModelAndView sinava(@ModelAttribute("deneme") Deneme sinava) {
+	public ModelAndView sinava(@ModelAttribute("deneme") Deneme sinava,
+			@RequestParam(value = "cern" , required = false) int[] cern ) {
 
 //		for (int iterable_element : sinava.getSorular().get(0).getKullanıcıcevabıo()) {
 //
@@ -173,20 +181,161 @@ public class DenemeController {
 //			System.err.println(iterable_element);
 //
 //		}
-
-		for (sorular iterable_element : sinava.getSorular() ){
-
-			for ( int item:   iterable_element.getKullanıcıcevabıo()) {
-				
-				System.err.println(item);
-				
-			}
-			System.err.println("////****");
-
-
+		
+		
+		///***tekil soruları bulma
+		List<Integer> sorular=new ArrayList<Integer>();
+		
+		
+		for (int i : cern) {
+			
+			
+			
+		sorular.add(aService.findById(i).get().getQuestion().getqId());	
+			
+			
 		}
+		HashSet hs = new HashSet();
+        hs.addAll(sorular);
+        sorular.clear();
+        sorular.addAll(hs);
+		
+		
+		////---
+        
+        
+        
+		
+	//	System.err.println(sorular);
+		
+		
+		List<List<Integer>> sorunumrasıCevaplar=new ArrayList<>();
+		List<List<Integer>> sorunumrasıCevaplar2=new ArrayList<>();
+		
+		List<Integer> cevaplar;
+		sorunumrasıCevaplar.add(sorular);
+		
+		for (List<Integer> list : sorunumrasıCevaplar) {
+			
+		
+			for (Integer list2 : list) {
+				cevaplar=new ArrayList<Integer>();
+				List<Answer> dGec=aService.findbyQuestion(qService.getQuestionByid(list2));
+				
+				
+				
+				for (Answer list3 : dGec) {
+					
+					System.err.println(list2+"..nci sarunun cavepalrı arasında  "+list3.getId()+"...yer alır");
+					
+					for (Integer list4 : cern ) {
+						
+						if(list3.getId()==list4) {
+							
+							
+							
+							cevaplar.add(list4);
+							break;
+							
+						}
+						
+						
+						
+					}
+					
+					
+					
+					
+				}
 
-		System.err.println();
+				if(cevaplar!=null)
+					sorunumrasıCevaplar2.add(cevaplar);
+			}
+		}
+		
+		
+		System.err.println(sorunumrasıCevaplar2);
+		
+		
+		
+//		for (int item : sorular) {
+//			
+//			List<Answer> dGec=aService.findbyQuestion(qService.getQuestionByid(item));
+//			
+//			for (Answer list : dGec) {
+//				
+//				
+//				sorunumrasıCevaplar.add(item,list.getId());
+//				
+//				
+//				
+//			}
+//			
+//			sorunumrasıCevaplar.add();
+//			
+//			
+//		}
+//		
+//		System.err.println(sorunumrasıCevaplar);
+//		
+//		
+//		
+//		
+//		
+//		for (List<Answer> item : sorunumrasıCevaplar) {
+//			for (Answer item2 : item ) {
+//				
+//				
+//				
+//				
+//			}
+//			
+//		}
+//		
+//		
+		
+		
+		
+//		
+//		List<List<Integer>> sorularvecevaplar=new ArrayList<List<Integer>>(); 
+//		
+//		sorularvecevaplar.add(sorular);
+//		
+//		
+//		
+//		
+//		for (List<Integer> list : sorularvecevaplar) {
+//			
+//		}
+//		
+//		
+		
+		
+//		List<Answer> dgec=aService.findbyQuestion(qService.getQuestionByid(sorular.get(0)));
+//		
+//		
+//		for (int i=0;i<sorularvecevaplar.size();i++)
+//		{
+//			
+//			aService.fi
+//			
+//		}
+//		
+//		for (List<Integer> list : sorularvecevaplar) {
+//			
+//			
+//			
+//			
+//		}
+		
+		
+		
+//System.err.println(sorularvecevaplar);		
+		
+		
+		
+		
+		
 
 		return new ModelAndView();
 

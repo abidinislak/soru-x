@@ -7,6 +7,16 @@ import com.example.demo.models.Test;
 public class Deneme {
 
 	private Test test;
+	
+	private int [] sayi;
+
+	public int[] getSayi() {
+		return sayi;
+	}
+
+	public void setSayi(int[] sayi) {
+		this.sayi = sayi;
+	}
 
 	private List<sorular> sorular;
 

@@ -15,7 +15,34 @@
 
 				<div th:object="${deneme}">
 
-					<div class="row">
+
+					<div class="row" th:each=" sayi ,iStat : ${deneme.sayi}">
+
+					
+
+						<!--	<input type="hidden" th:value="${deneme.sorular[0].soru.qId}" th:attr="name='qId'" /> -->
+
+						<p class="card-text" th:text="${deneme.sorular[sayi].soru.qtext}">
+						
+						<ul>
+							<li th:each="cevaplar: ${deneme.sorular[sayi].cevaplar}">
+							
+							<input type="checkbox"
+								  name="cern"   th:value="${cevaplar.id}" />
+									
+									
+									
+									
+									
+									
+									 <label	th:text="${cevaplar.atext}"></label></li>
+						</ul>
+
+
+
+					</div>
+
+					<!--<div class="row">
 
 						<p class="card-text" th:text="${deneme.sorular[0].soru.qtext}">
 
@@ -41,7 +68,7 @@
 
 						<ul>
 							<li th:each="cevaplar: ${deneme.sorular[1].cevaplar}"><input type="checkbox"
-									th:field="${deneme.sorular[1].kullanıcıcevabıo}" th:value="${cevaplar.id}" /> <label
+									      th:field="${deneme.sorular[1].kullanıcıcevabıo}" th:value="${cevaplar.id}" /> <label
 									th:text="${cevaplar.atext}"></label></li>
 						</ul>
 
@@ -64,11 +91,11 @@
 
 					<button class="btn btn-primary" type="submit">next</button>
 
-
+-->
 
 				</div>
 
-
+<button class="btn btn-primary" type="submit">next</button>
 
 			</form>
 
