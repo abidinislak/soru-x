@@ -24,6 +24,15 @@ public class TestService {
 	public List<Test> findAll() {
 		return testRepo.findAll();
 	}
+	
+	public List<String> categorytextBytest(int testid){
+		
+		return testRepo.categorytextBytest(testid);
+		
+	}
+	
+	
+	
 
 	public Test findById(Integer id) {
 

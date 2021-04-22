@@ -47,12 +47,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="test : ${tests}">
+				<tr th:each="dgec : ${tests}">
 
-					<td th:text="${test.tId}"></td>
-					<td th:text="${test.testTitleText}"></td>
-					<th><a th:href="@{/newtest/{id}(id=${test.tId})}">Edit</a> <a
-						th:href="@{/deletetest/{id}(id=${test.tId})}">Delete</a>
+					<td th:text="${dgec.test.tId}"></td>
+					<td th:text="${dgec.test.testTitleText}"></td>
+					<th><a th:href="@{/newtest/{id}(id=${dgec.test.tId})}">Edit</a> <a
+						th:href="@{/deletetest/{id}(id=${dgec.test.tId})}">Delete</a>
 
 					</th>
 

@@ -27,13 +27,13 @@
 				</thead>
 				<tbody>
 				
-					<tr th:each="test : ${tests}">
-						<td th:text="${test.tId}"></td>
-						<td th:text="${test.testTitleText}"></td>
-						<td scope="col">java, oca , certifications </td>
-						<td scope="col">bu deneme çok zor</td>
+					<tr th:each="dgec : ${tests}">
+						<td th:text="${dgec.test.tId}"></td>
+						<td th:text="${dgec.test.testTitleText}"></td>
+						<td th:text="${dgec.test.testAck}"></td>
+						<td th:text="${dgec.categorytext}"></td>
 						<td>
-							<a th:href="@{/deneme/deneme(Id=${test.tId})}">denme sınavına git </a>
+							<a th:href="@{/deneme/deneme(Id=${dgec.test.tId})}">denme sınavına git </a>
 						</td>
 					</tr>
 					</tr>

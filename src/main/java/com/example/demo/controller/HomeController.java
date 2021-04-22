@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,8 @@ import com.example.demo.services.AnswerService;
 import com.example.demo.services.CategoryService;
 import com.example.demo.services.QuestionService;
 import com.example.demo.services.TestService;
+import com.example.demo.utils.Tests1;
+import com.example.demo.utils.Tests2;
 
 @Controller
 public class HomeController {
@@ -87,7 +90,26 @@ public class HomeController {
 
 		ModelAndView mav = new ModelAndView("thome");
 
-		mav.addObject("tests", tService.findAll());
+//		mav.addObject("tests", tService.findAll());
+		
+	
+		List<Tests2> tests=new ArrayList<>();
+		
+		
+		for (Test iterable_element : tService.findAll()) {
+			Tests2 asdcfsd=new Tests2();
+			asdcfsd.setTest(iterable_element);
+			asdcfsd.setCategorytext(tService.categorytextBytest(iterable_element.gettId()));
+		
+		tests.add(asdcfsd);
+		}
+		
+		
+		
+		
+	mav.addObject("tests",tests);
+		
+		
 
 		return mav;
 	}
@@ -98,7 +120,21 @@ public class HomeController {
 
 		ModelAndView mav = new ModelAndView("denemehome");
 
-		mav.addObject("tests", tService.findAll());
+	//	mav.addObject("tests", tService.findAll());
+List<Tests2> tests=new ArrayList<>();
+		
+		
+		for (Test iterable_element : tService.findAll()) {
+			Tests2 asdcfsd=new Tests2();
+			asdcfsd.setTest(iterable_element);
+			asdcfsd.setCategorytext(tService.categorytextBytest(iterable_element.gettId()));
+		
+		tests.add(asdcfsd);
+		}
+		mav.addObject("tests",tests);
+
+		
+		
 
 		return mav;
 	}
