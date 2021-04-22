@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+	<div class="container">
+		<center>
+
+			<form th:action="@{/deneme/sinava}" th:object="${deneme}" method="post">
+
+			<p>sınavın sona erdi.sonuclar  </p>
+			<p th:text="${sorusayisi}"  > </p>
+			<p th:text="${trueCount}"  > </p>
+			<p th:text="${score}"  > </p>
+			
+			
+			
+			
+
+<button class="btn btn-primary" type="submit">next</button>
+
+			</form>
+
+
+
+		</center>
+
+	</div>
+
+
+</body>
+
+</html>

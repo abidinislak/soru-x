@@ -19,6 +19,7 @@ import com.example.demo.services.AnswerService;
 import com.example.demo.services.QuestionService;
 import com.example.demo.services.TestService;
 import com.example.demo.utils.Deneme;
+import com.example.demo.utils.Sonuc;
 import com.example.demo.utils.sorular;
 
 @Controller
@@ -113,13 +114,21 @@ public class DenemeController {
 			deneme.setSorular(sorular);
 			sirano++;
 		}
-		int [] asd= {0,1,2};
+		int[] asd = new int[sirano];
 		
-deneme.setSayi(asd);
+		for(int i=0;i<sirano;i++) {
+			
+			asd[i]=i;
+			
+			
+		}
+		
+
+		deneme.setSayi(asd);
 		mav.addObject("sorusira", 0);
-		
-		Integer [] cern= {};
-		mav.addObject("cern",cern);
+
+		Integer[] cern = {};
+		mav.addObject("cern", cern);
 
 		mav.addObject("deneme", deneme);
 
@@ -169,7 +178,7 @@ deneme.setSayi(asd);
 
 	@RequestMapping("/sinava")
 	public ModelAndView sinava(@ModelAttribute("deneme") Deneme sinava,
-			@RequestParam(value = "cern" , required = false) int[] cern ) {
+			@RequestParam(value = "cern", required = false) int[] cern) {
 
 //		for (int iterable_element : sinava.getSorular().get(0).getKullanıcıcevabıo()) {
 //
@@ -181,163 +190,93 @@ deneme.setSayi(asd);
 //			System.err.println(iterable_element);
 //
 //		}
-		
-		
-		///***tekil soruları bulma
-		List<Integer> sorular=new ArrayList<Integer>();
-		
-		
+
+		/// ***tekil soruları bulma
+		List<Integer> testtekiTumSorular = new ArrayList<Integer>();
+
 		for (int i : cern) {
-			
-			
-			
-		sorular.add(aService.findById(i).get().getQuestion().getqId());	
-			
-			
+
+			testtekiTumSorular.add(aService.findById(i).get().getQuestion().getqId());
+
 		}
 		HashSet hs = new HashSet();
-        hs.addAll(sorular);
-        sorular.clear();
-        sorular.addAll(hs);
-		
-		
-		////---
-        
-        
-        
-		
-	//	System.err.println(sorular);
-		
-		
-		List<List<Integer>> sorunumrasıCevaplar=new ArrayList<>();
-		List<List<Integer>> sorunumrasıCevaplar2=new ArrayList<>();
-		
+		hs.addAll(testtekiTumSorular);
+		testtekiTumSorular.clear();
+		testtekiTumSorular.addAll(hs);
+
+		//// --- testteki soru idleri
+		System.err.println(testtekiTumSorular);
+
+		List<List<Integer>> sorunumrasıCevaplar = new ArrayList<>();
+		List<List<Integer>> testtekiSorularaVerielnKullaniciCevaplari = new ArrayList<>();
+
 		List<Integer> cevaplar;
-		sorunumrasıCevaplar.add(sorular);
-		
+		sorunumrasıCevaplar.add(testtekiTumSorular);
 		for (List<Integer> list : sorunumrasıCevaplar) {
-			
-		
 			for (Integer list2 : list) {
-				cevaplar=new ArrayList<Integer>();
-				List<Answer> dGec=aService.findbyQuestion(qService.getQuestionByid(list2));
-				
-				
-				
+				cevaplar = new ArrayList<Integer>();
+				List<Answer> dGec = aService.findbyQuestion(qService.getQuestionByid(list2));
 				for (Answer list3 : dGec) {
-					
-					System.err.println(list2+"..nci sarunun cavepalrı arasında  "+list3.getId()+"...yer alır");
-					
-					for (Integer list4 : cern ) {
-						
-						if(list3.getId()==list4) {
-							
-							
-							
+					System.err.println(list2 + "..nci sarunun cavepalrı arasında  " + list3.getId() + "...yer alır");
+					for (Integer list4 : cern) {
+						if (list3.getId() == list4) {
 							cevaplar.add(list4);
 							break;
-							
 						}
-						
-						
-						
 					}
-					
-					
-					
-					
 				}
-
-				if(cevaplar!=null)
-					sorunumrasıCevaplar2.add(cevaplar);
+				if (cevaplar != null)
+					testtekiSorularaVerielnKullaniciCevaplari.add(cevaplar);
 			}
 		}
-		
-		
-		System.err.println(sorunumrasıCevaplar2);
-		
-		
-		
-//		for (int item : sorular) {
-//			
-//			List<Answer> dGec=aService.findbyQuestion(qService.getQuestionByid(item));
-//			
-//			for (Answer list : dGec) {
-//				
-//				
-//				sorunumrasıCevaplar.add(item,list.getId());
-//				
-//				
-//				
-//			}
-//			
-//			sorunumrasıCevaplar.add();
-//			
-//			
-//		}
-//		
-//		System.err.println(sorunumrasıCevaplar);
-//		
-//		
-//		
-//		
-//		
-//		for (List<Answer> item : sorunumrasıCevaplar) {
-//			for (Answer item2 : item ) {
-//				
-//				
-//				
-//				
-//			}
-//			
-//		}
-//		
-//		
-		
-		
-		
-//		
-//		List<List<Integer>> sorularvecevaplar=new ArrayList<List<Integer>>(); 
-//		
-//		sorularvecevaplar.add(sorular);
-//		
-//		
-//		
-//		
-//		for (List<Integer> list : sorularvecevaplar) {
-//			
-//		}
-//		
-//		
-		
-		
-//		List<Answer> dgec=aService.findbyQuestion(qService.getQuestionByid(sorular.get(0)));
-//		
-//		
-//		for (int i=0;i<sorularvecevaplar.size();i++)
-//		{
-//			
-//			aService.fi
-//			
-//		}
-//		
-//		for (List<Integer> list : sorularvecevaplar) {
-//			
-//			
-//			
-//			
-//		}
-		
-		
-		
-//System.err.println(sorularvecevaplar);		
-		
-		
-		
-		
-		
+		/// her bir sorunun cveaplarının idleri
+		System.err.println(testtekiSorularaVerielnKullaniciCevaplari);
 
-		return new ModelAndView();
+		List<List<Integer>> TestekiSorularinTrueCevaplari = new ArrayList<>();
+
+		for (List<Integer> list : sorunumrasıCevaplar) {
+			for (Integer list2 : list) {
+
+				List<Integer> dGec = aService.trueAnswers(list2);
+				TestekiSorularinTrueCevaplari.add(dGec);
+
+			}
+
+		}
+		/// her bir sorunun dogru veaplari
+		System.err.println(TestekiSorularinTrueCevaplari);
+
+		/// *** sonucun tespiti
+
+		List<Sonuc> dGecsonuc = new ArrayList<>();
+
+		for (int i = 0; i < testtekiTumSorular.size(); i++) {
+
+			Sonuc dGec = new Sonuc();
+
+			dGec.soruid = testtekiTumSorular.get(i);
+			dGec.trueMu = testtekiSorularaVerielnKullaniciCevaplari.get(i).equals(TestekiSorularinTrueCevaplari.get(i));
+			dGecsonuc.add(dGec);
+		}
+		System.err.println(dGecsonuc);
+
+		int truecount = 0;
+
+		for (Sonuc sonuc : dGecsonuc) {
+			if (sonuc.trueMu) {
+				truecount++;
+			}
+
+		}
+
+		Double score = (double) truecount / (double) dGecsonuc.size();
+		ModelAndView mav = new ModelAndView("deneme/sonuc");
+		mav.addObject("sonuc", dGecsonuc);
+		mav.addObject("sorusayisi", dGecsonuc.size());
+		mav.addObject("trueCount", truecount);
+		mav.addObject("score", score);
+
+		return mav;
 
 	}
 

@@ -18,24 +18,23 @@
 
 					<div class="row" th:each=" sayi ,iStat : ${deneme.sayi}">
 
-					
+
 
 						<!--	<input type="hidden" th:value="${deneme.sorular[0].soru.qId}" th:attr="name='qId'" /> -->
 
 						<p class="card-text" th:text="${deneme.sorular[sayi].soru.qtext}">
-						
+
 						<ul>
 							<li th:each="cevaplar: ${deneme.sorular[sayi].cevaplar}">
-							
-							<input type="checkbox"
-								  name="cern"   th:value="${cevaplar.id}" />
-									
-									
-									
-									
-									
-									
-									 <label	th:text="${cevaplar.atext}"></label></li>
+
+								<input type="checkbox" name="cern" th:value="${cevaplar.id}" />
+
+
+
+
+
+
+								<label th:text="${cevaplar.atext}"></label></li>
 						</ul>
 
 
@@ -95,8 +94,10 @@
 
 				</div>
 
-<button class="btn btn-primary" type="submit">next</button>
+				<div class="col-md-12 text-center">
 
+					<button class="btn btn-primary" type="submit">finish exam</button>
+				</div>
 			</form>
 
 

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -162,6 +163,52 @@ public class HomeController {
 
 			Question question = qservice.getQuestionByid(id);
 
+			String warningMessage = "";
+			boolean warning = false;
+			List<Answer> dGecAnswerlist = aService.findbyQuestion(question);
+
+			if (dGecAnswerlist.size() < 1) {
+				warning = true;
+				warningMessage = "en az bir adet doğru cevap ve bir adet yanlış cevap ekleyiniz. Aksi halde sorunuz gecerli b,r soru olmayacaktır";
+			} else {
+
+				boolean hasTrue = false;
+				boolean hasfalse = false;
+
+				for (Answer answer : dGecAnswerlist) {
+
+					if (answer.isTrueMu()) {
+						hasTrue = true;
+						break;
+					}
+				}
+
+				for (Answer answer : dGecAnswerlist) {
+
+					if (!answer.isTrueMu()) {
+						hasfalse = true;
+						break;
+					}
+				}
+
+				if (!hasfalse) {
+					warning = true;
+					warningMessage = "en az bir adet yanlışcevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+				}
+
+				if (!hasTrue) {
+					warning = true;
+
+					warningMessage = "en az bir adet doğrucevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+				}
+
+			}
+
+			mav.addObject("warning", warning);
+			mav.addObject("warningmessage", warningMessage);
+
 			mav.addObject("question", question);
 
 			mav.addObject("answer", new Answer());
@@ -277,6 +324,53 @@ public class HomeController {
 		}
 		ModelAndView mav = new ModelAndView("addquestion");
 		mav.addObject("categories", cService.findAll());
+
+		String warningMessage = "";
+		boolean warning = false;
+		List<Answer> dGecAnswerlist = aService.findbyQuestion(question);
+
+		if (dGecAnswerlist.size() < 1) {
+			warning = true;
+			warningMessage = "en az bir adet doğru cevap ve bir adet yanlış cevap ekleyiniz. Aksi halde sorunuz gecerli b,r soru olmayacaktır";
+		} else {
+
+			boolean hasTrue = false;
+			boolean hasfalse = false;
+
+			for (Answer answer : dGecAnswerlist) {
+
+				if (answer.isTrueMu()) {
+					hasTrue = true;
+					break;
+				}
+			}
+
+			for (Answer answer : dGecAnswerlist) {
+
+				if (!answer.isTrueMu()) {
+					hasfalse = true;
+					break;
+				}
+			}
+
+			if (!hasfalse) {
+				warning = true;
+				warningMessage = "en az bir adet yanlışcevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+			}
+
+			if (!hasTrue) {
+				warning = true;
+
+				warningMessage = "en az bir adet doğrucevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+			}
+
+		}
+
+
+		mav.addObject("warning", warning);
+		mav.addObject("warningmessage", warningMessage);
 
 		Answer answer = new Answer();
 
@@ -397,6 +491,59 @@ public class HomeController {
 		aService.deleteById(id);
 		System.err.println(qservice.findById(dGec).get().getqId());
 		mav.addObject("answers", aService.findbyQuestion(qservice.findById(dGec).get()));
+		
+		
+		String warningMessage = "";
+		boolean warning = false;
+		List<Answer> dGecAnswerlist = aService.findbyQuestion(qservice.findById(dGec).get());
+
+		if (dGecAnswerlist.size() < 1) {
+			warning = true;
+			warningMessage = "en az bir adet doğru cevap ve bir adet yanlış cevap ekleyiniz. Aksi halde sorunuz gecerli b,r soru olmayacaktır";
+		} else {
+
+			boolean hasTrue = false;
+			boolean hasfalse = false;
+
+			for (Answer answer : dGecAnswerlist) {
+
+				if (answer.isTrueMu()) {
+					hasTrue = true;
+					break;
+				}
+			}
+
+			for (Answer answer : dGecAnswerlist) {
+
+				if (!answer.isTrueMu()) {
+					hasfalse = true;
+					break;
+				}
+			}
+
+			if (!hasfalse) {
+				warning = true;
+				warningMessage = "en az bir adet yanlışcevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+			}
+
+			if (!hasTrue) {
+				warning = true;
+
+				warningMessage = "en az bir adet doğrucevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+			}
+
+		}
+
+
+		mav.addObject("warning", warning);
+		mav.addObject("warningmessage", warningMessage);
+		
+		
+		
+		
+		
 
 		mav.addObject("question", qservice.getQuestionByid(dGec));
 
@@ -435,15 +582,61 @@ public class HomeController {
 
 	@RequestMapping(value = "/addanswer", method = RequestMethod.POST)
 	public ModelAndView addAnswer(@ModelAttribute("question") Question question,
-			@ModelAttribute("answer") Answer answer) {
+			@ModelAttribute("answer") Answer answerFrom) {
 
 		System.err.println(question.getqId());
 
-		answer.setQuestion(question);
+		answerFrom.setQuestion(question);
 
-		aService.save(answer);
+		aService.save(answerFrom);
 
 		ModelAndView mav = new ModelAndView("addquestion");
+		String warningMessage = "";
+		boolean warning = false;
+		List<Answer> dGecAnswerlist = aService.findbyQuestion(question);
+
+		if (dGecAnswerlist.size() < 1) {
+			warning = true;
+			warningMessage = "en az bir adet doğru cevap ve bir adet yanlış cevap ekleyiniz. Aksi halde sorunuz gecerli b,r soru olmayacaktır";
+		} else {
+
+			boolean hasTrue = false;
+			boolean hasfalse = false;
+
+			for (Answer answer : dGecAnswerlist) {
+
+				if (answer.isTrueMu()) {
+					hasTrue = true;
+					break;
+				}
+			}
+
+			for (Answer answer : dGecAnswerlist) {
+
+				if (!answer.isTrueMu()) {
+					hasfalse = true;
+					break;
+				}
+			}
+
+			if (!hasfalse) {
+				warning = true;
+				warningMessage = "en az bir adet yanlışcevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+			}
+
+			if (!hasTrue) {
+				warning = true;
+
+				warningMessage = "en az bir adet doğrucevap ekleyınız. aksi halsde sorunuz gecerli bir olmayavktır ve kullanıma kapalımolacaltır";
+
+			}
+
+		}
+
+
+		mav.addObject("warning", warning);
+		mav.addObject("warningmessage", warningMessage);
 
 		mav.addObject("answers", aService.findbyQuestion(question));
 

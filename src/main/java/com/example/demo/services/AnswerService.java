@@ -13,7 +13,7 @@ import com.example.demo.models.Question;
 
 @Service
 
-public class AnswerService {
+public class AnswerService  {
 
 	@Autowired
 	private AnswerRepo Arepo;
@@ -23,6 +23,12 @@ public class AnswerService {
 		Arepo.save(answer);
 	}
 
+	public List<Integer> trueAnswers (Integer soruid) {
+
+		return Arepo.trueAnswers(soruid);
+	}
+	
+	
 	public List<Answer> findbyQuestion(Question question) {
 
 		return Arepo.findByQuestion(question);
