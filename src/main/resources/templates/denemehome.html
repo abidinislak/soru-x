@@ -4,6 +4,7 @@
 <head th:replace="fragments/head :: head">
 
 </head>
+
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 
@@ -20,23 +21,35 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">denme adı</th>
-						<th scope="col">deneme kategorilker</th>
-						<th scope="col">denem açıklama</th>
-						<th scope="col">actions</th> <
+						<th scope="col">deneme açıklama</th>
+						<th scope="col">denem kategorileri</th>
+						<th scope="col">actions</th>
 					</tr>
 				</thead>
 				<tbody>
-				
+
 					<tr th:each="dgec : ${tests}">
+
+
+
 						<td th:text="${dgec.test.tId}"></td>
+
 						<td th:text="${dgec.test.testTitleText}"></td>
 						<td th:text="${dgec.test.testAck}"></td>
-						<td th:text="${dgec.categorytext}"></td>
+						<td>
+							<div th:each="category : ${dgec.categorytext}">
+
+								<span th:text="${category}"></span>
+
+							</div>
+
+						</td>
+
 						<td>
 							<a th:href="@{/deneme/deneme(Id=${dgec.test.tId})}">denme sınavına git </a>
 						</td>
 					</tr>
-					</tr>
+
 				</tbody>
 
 			</table>
@@ -51,4 +64,5 @@
 
 
 </body>
+
 </html>
