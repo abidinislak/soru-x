@@ -270,11 +270,13 @@ public class DenemeController {
 		}
 
 		Double score = (double) truecount / (double) dGecsonuc.size();
+		
+		score=score*100;
 		ModelAndView mav = new ModelAndView("deneme/sonuc");
 		mav.addObject("sonuc", dGecsonuc);
 		mav.addObject("sorusayisi", dGecsonuc.size());
 		mav.addObject("trueCount", truecount);
-		mav.addObject("score", score);
+		mav.addObject("score", score.intValue());
 
 		return mav;
 

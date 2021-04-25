@@ -13,16 +13,51 @@
 
 			<form th:action="@{/deneme/sinava}" th:object="${deneme}" method="post">
 
-			<p>sınavın sona erdi.sonuclar  </p>
-			<p th:text="${sorusayisi}"  > </p>
-			<p th:text="${trueCount}"  > </p>
-			<p th:text="${score}"  > </p>
-			
-			
-			
-			
+				<p>sınavın sona erdi.sonuclar </p>
 
-<button class="btn btn-primary" type="submit">next</button>
+				<div class="row">
+					<div class="col-sm">
+						<p>soru sayisi</p>
+					</div>
+					<div class="col-sm">
+						<p th:text="${sorusayisi}"> </p>
+						</p>
+					</div>
+
+
+
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<p>dogru cveap sayisi</p>
+					</div>
+					<div class="col-sm">
+						<p th:text=" ${trueCount}"> </p>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<p>notunuz</p>
+					</div>
+					<div class="col-sm">
+						<p th:text="  ${score}"> </p>
+					</div>
+
+
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+				<button class="btn btn-primary" type="submit">next</button>
 
 			</form>
 
