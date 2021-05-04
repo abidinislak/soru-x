@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.AnswerRepo;
@@ -43,5 +44,18 @@ public class AnswerService  {
 
 		return Arepo.findById(id);
 	}
+	
+	//
+	public boolean CheckCountFalse(int soruid) {
+		return Arepo.CheckCountFalse(soruid) >0 ;
+	}
+	
+	
+	
+	public boolean CheckCountTrue(int soruid) {
+		
+		return Arepo.CheckCountTrue(soruid) > 0;
+		
+	};
 
 }

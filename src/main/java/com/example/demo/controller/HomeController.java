@@ -53,16 +53,53 @@ public class HomeController {
 
 		mav.addObject("categories", cService.findAll());
 
-		if (qtext.isEmpty() || qtext.isBlank() || qtext == null) {
 
-			mav.addObject("questions", qservice.findAll());
+		List<Question> qlist= qservice.findAll();
+		List<Question> qlistindex= new ArrayList<>();
+		List<Question> qlistindexBad= new ArrayList<>();
+		
+		
+		for (Question question2 : qlist) {
+			
+			if(aService.CheckCountFalse(question2.getqId()) && aService.CheckCountTrue(question2.getqId())   ) 
+			
+			{
+				
+				qlistindex.add(question2);
+			}
+			
+			else {
+				
+				qlistindexBad.add(question2);
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
+		if (qtext.isEmpty() || qtext.isBlank() || qtext == null) {
+			
+			
+			
+
+			
+			mav.addObject("questions", qlistindex);
+			mav.addObject("questionsBad", qlistindexBad);
 
 		}
 
 		else {
 
-			mav.addObject("questions", qservice.findByQtext(qtext));
+			mav.addObject("questions", qlistindex);
+			mav.addObject("questionsBad", qlistindexBad);
+			
+			
 		}
+		
+		
 		mav.addObject("question", question);
 
 		mav.addObject("message", "wellcome to soru-x world");
@@ -308,7 +345,6 @@ List<Tests2> tests=new ArrayList<>();
 
 		for (Question question : qservice.findByCategory(category)) {
 
-			System.err.println(question.getQtext());
 		}
 
 		return mav;
@@ -318,8 +354,6 @@ List<Tests2> tests=new ArrayList<>();
 
 	public ModelAndView addTest(@ModelAttribute("cat") Category category, @ModelAttribute("test") Test test) {
 
-		System.err.println(test.getTestTitleText());
-		System.err.println(test.gettId());
 
 		if (test.gettId() > 0) {
 
@@ -525,7 +559,6 @@ List<Tests2> tests=new ArrayList<>();
 
 		int dGec = (aService.findById(id)).get().getQuestion().getqId();
 		aService.deleteById(id);
-		System.err.println(qservice.findById(dGec).get().getqId());
 		mav.addObject("answers", aService.findbyQuestion(qservice.findById(dGec).get()));
 		
 		
@@ -595,17 +628,13 @@ List<Tests2> tests=new ArrayList<>();
 
 //		System.err.println(answer.getAtext());
 //		System.err.println(answer.getId());
-		System.err.println(id);
-		System.err.println(id2);
 
 		Optional<Answer> modifyAnswerOptional = aService.findById(id);
 
 		Answer modifyAnswer = modifyAnswerOptional.get();
 
-		System.err.println(modifyAnswer.getAtext());
 
 		modifyAnswer.setAtext(id2);
-		System.err.println(modifyAnswer.getAtext());
 
 		aService.save(modifyAnswer);
 
@@ -620,7 +649,6 @@ List<Tests2> tests=new ArrayList<>();
 	public ModelAndView addAnswer(@ModelAttribute("question") Question question,
 			@ModelAttribute("answer") Answer answerFrom) {
 
-		System.err.println(question.getqId());
 
 		answerFrom.setQuestion(question);
 

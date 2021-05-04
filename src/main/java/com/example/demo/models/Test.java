@@ -8,12 +8,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Test {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int tId;
+
+	@ManyToOne
+	private Result result;
+
+
+	public Result getResult() {
+		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
+	}
 
 	public int gettId() {
 		return tId;

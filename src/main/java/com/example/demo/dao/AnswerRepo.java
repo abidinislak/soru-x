@@ -17,6 +17,13 @@ public interface AnswerRepo extends JpaRepository<Answer, Integer> {
 	@Query(value = "SELECT id FROM sorux.answer where true_mu=true and question_q_id = ?1", nativeQuery = true)
 	public List<Integer> trueAnswers(int soruid);
 	
+	@Query(value = "SELECT count(*) FROM sorux.answer where  true_mu=0 and   question_q_id = ?1", nativeQuery = true)
+	public int CheckCountFalse(int soruid);
+	
+	
+	
+	@Query(value = "SELECT count(*) FROM sorux.answer where  true_mu=1 and   question_q_id =?1", nativeQuery = true)
+	public int CheckCountTrue(int soruid);
 	
 	
 

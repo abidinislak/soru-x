@@ -1,61 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head  th:replace="fragments/head :: head"  >
-  
-</head    >
+<head th:replace="fragments/head :: head">
+
+</head>
+
 <body>
-<nav  th:replace="fragments/navbar :: navbar" ></nav>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
 
 
-<div class="container" >
-<center>
-
-
-
-<h1>
-welcome to sorular x page
-</h1><br>
-<form th:action="@{/new/{id}(id=0)}"  method="post"   >  
-<button class="btn btn-primary" type="submit">soru ekle</button>
+	<div class="container">
+		<center>
 
 
 
-</form>
-
-
-	<table class="table table-hover">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">question text</th>
-					<th scope="col">question category</th>
-					<th scope="col">question category</th>
-					<th scope="col">Actions</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="question : ${questions}">
-					<td th:text="${question.qId}"></td>
-					<td th:text="${question.qtext}"></td>
-					<td th:text="${question.category}"></td>
-					<td><a th:href="@{/new/{id}(id=${question.qId})}">Edit</a> <a
-						th:href="@{/delete/{id}(id=${question.qId})}">Delete</a></td>
-				</tr>
-
-			</tbody>
-		</table>
+			<h1>
+				welcome to sorular x page
+			</h1><br>
+			<form th:action="@{/new/{id}(id=0)}" method="post">
+				<button class="btn btn-primary" type="submit">soru ekle</button>
 
 
 
+			</form>
+
+<p style="color: green;"  > eklemeye uygun sorular  </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">question text</th>
+						<th scope="col">question category</th>
+						<th scope="col">question category</th>
+						<th scope="col">Actions</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="question : ${questions}">
+						<td th:text="${question.qId}"></td>
+						<td th:text="${question.qtext}"></td>
+						<td th:text="${question.category}"></td>
+						<td><a th:href="@{/new/{id}(id=${question.qId})}">Edit</a> <a
+								th:href="@{/delete/{id}(id=${question.qId})}">Delete</a></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<br>
+			<br>
+			<br>
+
+<p   style="color: red;"  > eklemeye uygun olmayan sorular   </p>
+
+			<table class="table table-hover">
+				<thead  >
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">question text</th>
+						<th scope="col">question category</th>
+						<th scope="col">question category</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="question : ${questionsBad}">
+						<td th:text="${question.qId}"></td>
+						<td th:text="${question.qtext}"></td>
+						<td th:text="${question.category}"></td>
+						<td><a th:href="@{/new/{id}(id=${question.qId})}">Edit</a> <a
+								th:href="@{/delete/{id}(id=${question.qId})}">Delete</a></td>
+					</tr>
+
+				</tbody>
+			</table>
 
 
 
-</center>
 
-</div>
+		</center>
+
+	</div>
 
 
 </body>
+
 </html>

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -83,7 +84,6 @@ public class DenemeController {
 	@RequestMapping("/sinav")
 	public ModelAndView sınav(int Id, @ModelAttribute("test") Test test) {
 
-		System.err.println(test.getTestAck());
 
 		ModelAndView mav = new ModelAndView("deneme/sinav");
 
@@ -177,8 +177,8 @@ public class DenemeController {
 	}
 
 	@RequestMapping("/sinava")
-	public ModelAndView sinava(@ModelAttribute("deneme") Deneme sinava,
-			@RequestParam(value = "cern", required = false) int[] cern) {
+	public ModelAndView sinava(@ModelAttribute("deneme") Deneme deneme,
+			@RequestParam int[] cern){
 
 //		for (int iterable_element : sinava.getSorular().get(0).getKullanıcıcevabıo()) {
 //
@@ -205,7 +205,6 @@ public class DenemeController {
 		testtekiTumSorular.addAll(hs);
 
 		//// --- testteki soru idleri
-		System.err.println(testtekiTumSorular);
 
 		List<List<Integer>> sorunumrasıCevaplar = new ArrayList<>();
 		List<List<Integer>> testtekiSorularaVerielnKullaniciCevaplari = new ArrayList<>();
@@ -217,7 +216,6 @@ public class DenemeController {
 				cevaplar = new ArrayList<Integer>();
 				List<Answer> dGec = aService.findbyQuestion(qService.getQuestionByid(list2));
 				for (Answer list3 : dGec) {
-					System.err.println(list2 + "..nci sarunun cavepalrı arasında  " + list3.getId() + "...yer alır");
 					for (Integer list4 : cern) {
 						if (list3.getId() == list4) {
 							cevaplar.add(list4);
@@ -230,7 +228,6 @@ public class DenemeController {
 			}
 		}
 		/// her bir sorunun cveaplarının idleri
-		System.err.println(testtekiSorularaVerielnKullaniciCevaplari);
 
 		List<List<Integer>> TestekiSorularinTrueCevaplari = new ArrayList<>();
 
@@ -244,7 +241,6 @@ public class DenemeController {
 
 		}
 		/// her bir sorunun dogru veaplari
-		System.err.println(TestekiSorularinTrueCevaplari);
 
 		/// *** sonucun tespiti
 
@@ -258,7 +254,6 @@ public class DenemeController {
 			dGec.trueMu = testtekiSorularaVerielnKullaniciCevaplari.get(i).equals(TestekiSorularinTrueCevaplari.get(i));
 			dGecsonuc.add(dGec);
 		}
-		System.err.println(dGecsonuc);
 
 		int truecount = 0;
 
@@ -277,6 +272,12 @@ public class DenemeController {
 		mav.addObject("sorusayisi", dGecsonuc.size());
 		mav.addObject("trueCount", truecount);
 		mav.addObject("score", score.intValue());
+		
+		
+		
+		
+		
+		
 
 		return mav;
 
