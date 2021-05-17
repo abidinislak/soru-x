@@ -179,7 +179,7 @@ public class DenemeController {
 
 	@RequestMapping(value = "/sinava", method = RequestMethod.POST)
 	public ModelAndView sinava(@ModelAttribute("deneme") Deneme deneme,
-			@RequestParam("cern") int[] cern){
+			@RequestParam("cern") int[] cern,@RequestParam("www") int www){
 
 //		for (int iterable_element : sinava.getSorular().get(0).getKullanıcıcevabıo()) {
 //
