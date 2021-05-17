@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -176,9 +177,9 @@ public class DenemeController {
 		return mav;
 	}
 
-	@RequestMapping("/sinava")
+	@RequestMapping(value = "/sinava", method = RequestMethod.POST)
 	public ModelAndView sinava(@ModelAttribute("deneme") Deneme deneme,
-			@RequestParam int[] cern){
+			@RequestParam("cern") int[] cern){
 
 //		for (int iterable_element : sinava.getSorular().get(0).getKullanıcıcevabıo()) {
 //
