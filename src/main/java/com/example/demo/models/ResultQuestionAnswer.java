@@ -19,6 +19,38 @@ public class ResultQuestionAnswer {
 	private int answerId;
 	
 	private boolean atrue;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getResultQuestionId() {
+		return resultQuestionId;
+	}
+
+	public void setResultQuestionId(int resultQuestionId) {
+		this.resultQuestionId = resultQuestionId;
+	}
+
+	public int getAnswerId() {
+		return answerId;
+	}
+
+	public void setAnswerId(int answerId) {
+		this.answerId = answerId;
+	}
+
+	public boolean isAtrue() {
+		return atrue;
+	}
+
+	public void setAtrue(boolean atrue) {
+		this.atrue = atrue;
+	}
 	
 	
 	

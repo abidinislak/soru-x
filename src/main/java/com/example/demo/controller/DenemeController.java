@@ -14,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.ResultQuestionAnswerRepo;
+import com.example.demo.dao.ResultQuestionRepo;
+import com.example.demo.dao.ResultRepo;
 import com.example.demo.models.Answer;
 import com.example.demo.models.Question;
+import com.example.demo.models.Result;
+import com.example.demo.models.ResultQuestion;
+import com.example.demo.models.ResultQuestionAnswer;
 import com.example.demo.models.Test;
 import com.example.demo.services.AnswerService;
 import com.example.demo.services.QuestionService;
@@ -30,7 +36,14 @@ public class DenemeController {
 
 	@Autowired
 	private TestService tService;
+	@Autowired
+	private ResultRepo rService;
+	@Autowired
+	private ResultQuestionRepo rqService;
 
+	@Autowired
+	private ResultQuestionAnswerRepo    rqaService;
+	
 	@Autowired
 	private QuestionService qService;
 
@@ -264,7 +277,12 @@ public class DenemeController {
 			}
 
 		}
-
+			
+		
+		
+		
+		
+		
 		Double score = (double) truecount / (double) dGecsonuc.size();
 		
 		score=score*100;
@@ -273,6 +291,63 @@ public class DenemeController {
 		mav.addObject("sorusayisi", dGecsonuc.size());
 		mav.addObject("trueCount", truecount);
 		mav.addObject("score", score.intValue());
+		
+		
+		///+++ test sonucunu kaydetme
+		
+		Result dGecResult=new Result();
+		dGecResult.setTest(tService.findById(www));
+		dGecResult.setScore(score.intValue());
+		
+		dGecResult=	rService.save(dGecResult);
+		
+		
+	      List<ResultQuestion > 	dgec=new ArrayList<ResultQuestion>();
+		
+		for (Sonuc item : dGecsonuc) {
+			
+			ResultQuestion 	dgecrq=new ResultQuestion();
+			dgecrq.setResultId(dGecResult.getId());
+			dgecrq.setQuestion(item.soruid);
+			dgecrq.setQisTrue(item.trueMu);
+			dgecrq=rqService.save(dgecrq);
+			
+			
+			dgec.add(dgecrq);
+			
+				
+			
+		}
+		
+		
+		for ( int i=0;i<testtekiSorularaVerielnKullaniciCevaplari.size();i++ )
+		{
+			
+			
+			
+			
+			
+			for(  int a=0;a<testtekiSorularaVerielnKullaniciCevaplari.get(i).size();a++) {
+				
+				
+				ResultQuestionAnswer dgecRQA=new ResultQuestionAnswer();
+				dgecRQA.setResultQuestionId(dgec.get(i).getId());
+
+				dgecRQA.setAnswerId(testtekiSorularaVerielnKullaniciCevaplari.get(i).get(a));
+				
+				
+				dgecRQA.setAtrue(     aService.findById(testtekiSorularaVerielnKullaniciCevaplari.get(i).get(a)).get().isTrueMu());
+				
+				
+				rqaService.save(dgecRQA);
+				
+				
+				
+			}
+			
+			
+			
+		}
 		
 		
 		
