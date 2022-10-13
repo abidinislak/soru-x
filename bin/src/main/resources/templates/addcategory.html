@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+	welcoem to add category
+	<div class="container">
+
+
+
+		<form th:action="@{/addcategory}" method="post">
+
+
+			<div th:object="${category}">
+
+				<div class="form-group">
+
+					<label for="cText"> catgeopry text</label> <input type="text"
+						class="form-control" id="ctext" th:field="*{cText}" />
+
+
+
+					<p th:if="${#fields.hasErrors('cText')}" th:errors="*{cText}"  class="alert alert-danger">
+				</div>
+
+
+
+
+
+
+				<div th:object="${category}">
+
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="ssfd"
+							th:field="*{cId}" />
+
+
+					</div>
+
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+
+			<button class="btn btn-primary" type="submit">kaydet</button>
+
+		</form>
+
+
+
+
+	</div>
+
+
+</body>
+</html>

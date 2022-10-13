@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head">
+
+</head>
+<body>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
+
+
+
+	<center inputmode="text">wellcoem to the test işlemleri</center>
+	<!-- 	<center> -->
+
+	<!-- 		<form th:action="@{/newtest/{id}(id=0)}"> -->
+
+
+	<!-- 			<button type="submit">new test</button> -->
+
+
+	<!-- 		</form> -->
+
+	<!-- 	</center> -->
+
+
+	<div class="container">
+
+
+		<div class="card" style="background: bottom;">
+			<div class="card-body">
+
+				<h5 class="card-title" align="center">Add Test</h5>
+				<form th:action="@{/addtest}" method="post">
+
+					<div class="container">
+
+
+						<div class="row">
+							<div class="col">
+								<div th:object="${test}">
+									<div class="form-group">
+										<input type="hidden" class="form-control" id="qtext"
+											th:field="*{tId}" />
+									</div>
+								</div>
+
+								<div th:object="${test}">
+
+									<input th:field="*{testTitleText}">
+
+								</div>
+
+								<button class="btn btn-primary" type="submit">kaydet</button>
+
+							</div>
+
+
+							<div class="col" th:if="${test.tId gt 0}">
+								<table class="table">
+									<caption>List of questions by test</caption>
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">questions text</th>
+											<th scope="col">action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="question : ${questionsByTest}">
+											<td th:text="${question.qId}"></td>
+											<td th:text="${question.qtext}"></td>
+											<td><a
+												th:href="@{/addquestiontotest/{id}/{test} (id=${question.qId},test=${test.tId})}">add
+													to test</a></td>
+										</tr>
+									</tbody>
+								</table>
+
+
+
+
+							</div>
+						</div>
+
+
+					</div>
+
+
+
+
+
+				</form>
+
+
+			</div>
+		</div>
+<div  th:if="${test.tId gt 0}" >
+
+
+
+
+
+		<div class="card"  style="background:bottom;" >
+  <div class="card-body">
+    
+<h5 class="card-title" align="center">Add Question to Test</h5> 
+		<form th:action="@{/getcategoryquestions}" method="post"
+			>
+
+
+			<div class="form-group" th:object="${test}">
+				<input type="hidden" th:field="*{tId}" />
+
+			</div>
+
+
+
+			<div class="form-group" th:object="${cat}">
+
+
+				<select th:field="*{cId}">
+
+					<option th:each="category : ${categories}"
+						th:value="${category.cId}" th:utext="${category.cText}" />
+				</select>
+
+
+
+			</div>
+			<button class="btn btn-primary" type="submit">get questiond
+				by category</button>
+
+
+		</form>
+
+</div></div></div>
+
+		<!-- 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> -->
+		<!--   Launch demo modal -->
+		<!-- </button> -->
+
+		<!-- Modal -->
+		<!-- 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" -->
+		<!-- 			aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- 			<div class="modal-dialog" role="document"> -->
+		<!-- 				<div class="modal-content"> -->
+		<!-- 					qwdqw -->
+		<!-- 					<div class="modal-footer"> -->
+		<!-- 						<button type="button" class="btn btn-secondary" -->
+		<!-- 							data-dismiss="modal">Close</button> -->
+		<!-- 						<button type="button" class="btn btn-primary">Save -->
+		<!-- 							changes</button> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div th:if="${test.tId gt 0}">
+
+
+
+			<div class="form-group" th:object="${cat}">
+				<input type="hidden" th:field="*{cId}" /> <input th:field="*{cId}" />
+
+
+			</div>
+
+
+
+
+
+
+			<table class="table">
+				<caption>List of questions by category</caption>
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">questions text</th>
+						<th scope="col">action</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="question : ${guestions}">
+						<td th:text="${question.qId}"></td>
+						<td th:text="${question.qtext}"></td>
+						<td><a
+							th:href="@{/addquestiontotest/{id}/{test} /{cat} (id=${question.qId},test=${test.tId},cat=${cat.cId})}">add
+								to test</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+
+
+		</div>
+
+
+
+
+	</div>
+
+</body>
+</html>

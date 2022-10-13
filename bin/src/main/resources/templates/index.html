@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head  th:replace="fragments/head :: head"  >
+  
+</head    >
+<body>
+<nav  th:replace="fragments/navbar :: navbar" ></nav>
+
+
+<div class="container" >
+
+
+welcome to sorular x page
+
+<form th:action="@{/new/{id}(id=0)}"  method="post"   >  
+<button class="btn btn-primary" type="submit">soru ekle</button>
+
+
+
+</form>
+
+
+	<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">question text</th>
+					<th scope="col">question category</th>
+					<th scope="col">Actions</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="question : ${questions}">
+					<td th:text="${question.qId}"></td>
+					<td th:text="${question.qtext}"></td>
+					<td th:text="${question.category}"></td>
+
+
+
+<!-- 					<td th:each="category : ${categories}" -->
+<!-- 						th:if="(${category.categoryid} == *{category.cId})" -->
+<!-- 						th:text="${category.cText}"></td> -->
+
+
+
+
+
+					<td><a th:href="@{/new/{id}(id=${question.qId})}">Edit</a> <a
+						th:href="@{/delete/{id}(id=${question.qId})}">Delete</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+
+
+
+
+
+
+
+</div>
+
+
+</body>
+</html>
